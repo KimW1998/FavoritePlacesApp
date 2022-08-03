@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Colors } from "../../constants/colors";
 import Button from "../ui/Button";
@@ -6,25 +6,41 @@ import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 
 function PlaceForm() {
-const [enteredTitle, setEnteredTitle] =useState('');
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [selectedImage, setSelectedImage] = useState();
+  const [pickedLocation, setPickedLocation] = useState();
 
-function changeTitleHandler(enteredText) {
+  function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
-}
+  }
 
-function savePlaceHandler() {}
+  function takeImageHandler(imageUri) {
+    setSelectedImage(imageUri);
+  }
+
+  const pickLocationHandler = useCallback((location) => {
+    setPickedLocation(location);
+  }, []);
+
+  function savePlaceHandler() {
+    console.log(enteredTitle);
+    console.log(selectedImage);
+    console.log(pickedLocation);
+  }
 
   return (
     <ScrollView style={styles.form}>
-        <View>
-            <Text style={styles.label}>
-            title
-            </Text>
-            <TextInput style={styles.input} onChangeText={changeTitleHandler} value={enteredTitle} />
-        </View>
-        <ImagePicker />
-        <LocationPicker />
-        <Button onPress={savePlaceHandler}>Add Place</Button>
+      <View>
+        <Text style={styles.label}>title</Text>
+        <TextInput
+          style={styles.input}
+          onChangeText={changeTitleHandler}
+          value={enteredTitle}
+        />
+      </View>
+      <ImagePicker onTakeImage={takeImageHandler} />
+      <LocationPicker onPickLocation={pickLocationHandler} />
+      <Button onPress={savePlaceHandler}>Add Place</Button>
     </ScrollView>
   );
 }
@@ -32,16 +48,16 @@ function savePlaceHandler() {}
 export default PlaceForm;
 
 const styles = StyleSheet.create({
-form: {
+  form: {
     flex: 1,
     padding: 24,
-},
-label: {
-    fontWeight: 'bold',
+  },
+  label: {
+    fontWeight: "bold",
     marginBottom: 4,
     color: Colors.primary500,
-},
-input: {
+  },
+  input: {
     marginVertical: 8,
     paddingHorizontal: 4,
     paddingVertical: 8,
@@ -49,5 +65,5 @@ input: {
     borderBottomColor: Colors.primary700,
     borderBottomWidth: 2,
     backgroundColor: Colors.primary100,
-}
+  },
 });
