@@ -1,9 +1,11 @@
 import { Text, View } from "react-native";
 
 function PlaceForm() {
+  return (
     <View>
-        <Text>the place form</Text>
+      <Text>the place form</Text>
     </View>
+  );
 }
 
 export default PlaceForm;
