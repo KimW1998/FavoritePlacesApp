@@ -21,7 +21,7 @@ function PlacesList({ places }) {
 
 export default PlacesList;
 
-const styles = StyleSheetSheet.create({
+const styles = StyleSheet.create({
     fallBackContainer: {
     flex: 1,
     justifyContent: "center",
