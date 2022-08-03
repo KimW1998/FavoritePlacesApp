@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 function MapPick() {
@@ -9,9 +10,15 @@ function MapPick() {
   };
 
   return (
-  <MapView initialRegion={region}>
+  <MapView style={styles.map} initialRegion={region}>
   </MapView>
   );
 }
 
 export default MapPick;
+
+const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+  },
+});
