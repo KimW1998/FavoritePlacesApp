@@ -71,7 +71,8 @@ imagePreview: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Colors.primary100,
-    borderradius: 4,
+    borderRadius: 4,
+    overflow: 'hidden',
 },
 image: {
     width: '100%',

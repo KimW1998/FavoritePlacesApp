@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: Colors.primary100,
-        borderradius: 4,
+        borderRadius: 4,
+        overflow: 'hidden',
     },
     actions: {
         flexDirection: 'row',
