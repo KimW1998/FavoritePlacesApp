@@ -13,42 +13,50 @@ function MapPick({ navigation }) {
     longitudeDelta: 0.0421,
   };
 
-  function selectLocationHandeler(event) {
+  function selectLocationHandler(event) {
     const lat = event.nativeEvent.coordinate.latitude;
     const lng = event.nativeEvent.coordinate.longitude;
 
     setSelectedLocation({ lat: lat, lng: lng });
   }
 
-  const savePickedLocationHandler = useCallback (() => {
+  const savePickedLocationHandler = useCallback(() => {
     if (!selectedLocation) {
       Alert.alert(
-        "No location picked",
-        "You have to pick a location (by tapping on the map) first!"
+        'No location picked!',
+        'You have to pick a location (by tapping on the map) first!'
       );
       return;
     }
-    navigation.navigate("AddPlace", {
+
+    navigation.navigate('AddPlace', {
       pickedLat: selectedLocation.lat,
       pickedLng: selectedLocation.lng,
     });
   }, [navigation, selectedLocation]);
 
   useLayoutEffect(() => {
-navigation.setOptions({
-  headerRight: ({tintColor}) => <IconButton icon="save" size={24} color={tintColor} onPress={savePickedLocationHandler}/>
-})
+    navigation.setOptions({
+      headerRight: ({ tintColor }) => (
+        <IconButton
+          icon="save"
+          size={24}
+          color={tintColor}
+          onPress={savePickedLocationHandler}
+        />
+      ),
+    });
   }, [navigation, savePickedLocationHandler]);
 
   return (
     <MapView
       style={styles.map}
       initialRegion={region}
-      onPress={selectLocationHandeler}
+      onPress={selectLocationHandler}
     >
       {selectedLocation && (
         <Marker
-          title="picked location"
+          title="Picked Location"
           coordinate={{
             latitude: selectedLocation.lat,
             longitude: selectedLocation.lng,
