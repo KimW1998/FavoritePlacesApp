@@ -7,7 +7,7 @@ import PlaceItem from "./PlaceItem";
 function PlacesList({ places }) {
   const navigation = useNavigation();
 
-  function selectPlaceHandler() {
+  function selectPlaceHandler(id) {
     navigation.navigate("placeDetails", {
       placeId: id,
     });
