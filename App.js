@@ -1,21 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AllPlaces from './screens/AllPlaces';
-import AddPlace from './screens/AddPlace';
-import IconButton from './components/ui/iconButton';
-import { Colors } from './constants/colors';
-import Map from './screens/Map';
-import { useEffect } from 'react';
-import { init } from './util/database';
+import AllPlaces from "./screens/AllPlaces";
+import AddPlace from "./screens/AddPlace";
+import IconButton from "./components/ui/iconButton";
+import { Colors } from "./constants/colors";
+import Map from "./screens/Map";
+import { useEffect, useState } from "react";
+import { init } from "./util/database";
+import AppLoading from "expo-app-loading";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-useEffect(() => {
-  init();
-}, []);
+  const [dbInitialized, setDbInitialized] = useState(false);
+
+  useEffect(() => {
+    init().then(() => {
+      setDbInitialized(true);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  if (!dbInitialized) {
+    return <AppLoading />;
+  }
 
   return (
     <>
@@ -32,13 +43,13 @@ useEffect(() => {
             name="AllPlaces"
             component={AllPlaces}
             options={({ navigation }) => ({
-              title: 'Your Favorite Places',
+              title: "Your Favorite Places",
               headerRight: ({ tintColor }) => (
                 <IconButton
                   icon="add"
                   size={24}
                   color={tintColor}
-                  onPress={() => navigation.navigate('AddPlace')}
+                  onPress={() => navigation.navigate("AddPlace")}
                 />
               ),
             })}
@@ -47,7 +58,7 @@ useEffect(() => {
             name="AddPlace"
             component={AddPlace}
             options={{
-              title: 'Add a new Place',
+              title: "Add a new Place",
             }}
           />
           <Stack.Screen name="Map" component={Map} />
