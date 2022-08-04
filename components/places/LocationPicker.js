@@ -1,18 +1,19 @@
-import { StyleSheet, View, Alert, Text, Image } from "react-native";
-import { Colors } from "../../constants/colors";
-import OutlinedButton from "../ui/OutlinedButton";
+import { useEffect, useState } from 'react';
+import { Alert, View, StyleSheet, Image, Text } from 'react-native';
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
   PermissionStatus,
-} from "expo-location";
-import { useEffect, useState } from "react";
-import { getAddress, getMapPreview } from "../../util/location";
+} from 'expo-location';
 import {
   useNavigation,
   useRoute,
   useIsFocused,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
+
+import { Colors } from '../../constants/colors';
+import OutlinedButton from '../ui/OutlinedButton';
+import { getAddress, getMapPreview } from '../../util/location';
 
 function LocationPicker({ onPickLocation }) {
   const [pickedLocation, setPickedLocation] = useState();
@@ -83,7 +84,7 @@ function LocationPicker({ onPickLocation }) {
   }
 
   function pickOnMapHandler() {
-    navigation.navigate('MapPick');
+    navigation.navigate('Map');
   }
 
   let locationPreview = <Text>No location picked yet.</Text>;
@@ -118,22 +119,23 @@ export default LocationPicker;
 
 const styles = StyleSheet.create({
   mapPreview: {
-    width: "100%",
+    width: '100%',
     height: 200,
     marginVertical: 8,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: Colors.primary100,
     borderRadius: 4,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   actions: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
+    // borderRadius: 4
   },
 });

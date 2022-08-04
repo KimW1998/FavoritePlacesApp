@@ -1,27 +1,28 @@
-import { useCallback, useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import { Colors } from "../../constants/colors";
-import { Place } from "../../models/place";
-import Button from "../ui/Button";
-import ImagePicker from "./ImagePicker";
-import LocationPicker from "./LocationPicker";
+import { useCallback, useState } from 'react';
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+
+import { Colors } from '../../constants/colors';
+import { Place } from '../../models/place';
+import Button from '../ui/Button';
+import ImagePicker from './ImagePicker';
+import LocationPicker from './LocationPicker';
 
 function PlaceForm({onCreatePlace}) {
-    const [enteredTitle, setEnteredTitle] = useState('');
-    const [selectedImage, setSelectedImage] = useState();
-    const [pickedLocation, setPickedLocation] = useState();
-  
-    function changeTitleHandler(enteredText) {
-      setEnteredTitle(enteredText);
-    }
-  
-    function takeImageHandler(imageUri) {
-      setSelectedImage(imageUri);
-    }
-  
-    const pickLocationHandler = useCallback((location) => {
-      setPickedLocation(location);
-    }, []);
+  const [enteredTitle, setEnteredTitle] = useState('');
+  const [selectedImage, setSelectedImage] = useState();
+  const [pickedLocation, setPickedLocation] = useState();
+
+  function changeTitleHandler(enteredText) {
+    setEnteredTitle(enteredText);
+  }
+
+  function takeImageHandler(imageUri) {
+    setSelectedImage(imageUri);
+  }
+
+  const pickLocationHandler = useCallback((location) => {
+    setPickedLocation(location);
+  }, []);
 
   function savePlaceHandler() {
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   label: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 4,
     color: Colors.primary500,
   },

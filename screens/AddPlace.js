@@ -1,4 +1,4 @@
-import PlaceForm from "../components/places/PlaceForm";
+import PlaceForm from '../components/places/PlaceForm';
 
 function AddPlace({ navigation }) {
   function createPlaceHandler(place) {

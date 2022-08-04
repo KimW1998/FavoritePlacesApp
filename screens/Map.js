@@ -1,9 +1,10 @@
-import { useCallback, useLayoutEffect, useState } from "react";
-import { Alert, StyleSheet } from "react-native";
-import MapView, { Marker } from "react-native-maps";
-import IconButton from "../components/ui/iconButton";
+import { useCallback, useLayoutEffect, useState } from 'react';
+import { Alert, StyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
-function MapPick({ navigation }) {
+import IconButton from '../components/ui/iconButton';
+
+function Map({ navigation }) {
   const [selectedLocation, setSelectedLocation] = useState();
 
   const region = {
@@ -67,7 +68,7 @@ function MapPick({ navigation }) {
   );
 }
 
-export default MapPick;
+export default Map;
 
 const styles = StyleSheet.create({
   map: {
