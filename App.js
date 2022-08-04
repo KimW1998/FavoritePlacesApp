@@ -7,10 +7,16 @@ import AddPlace from './screens/AddPlace';
 import IconButton from './components/ui/iconButton';
 import { Colors } from './constants/colors';
 import Map from './screens/Map';
+import { useEffect } from 'react';
+import { init } from './util/database';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+useEffect(() => {
+  init();
+}, []);
+
   return (
     <>
       <StatusBar style="dark" />
