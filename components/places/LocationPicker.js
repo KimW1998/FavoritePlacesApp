@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert, Text } from "react-native";
+import { StyleSheet, View, Alert, Text, Image } from "react-native";
 import { Colors } from "../../constants/colors";
 import OutlinedButton from "../ui/OutlinedButton";
 import {
@@ -41,9 +41,11 @@ function LocationPicker({ onPickLocation }) {
           pickedLocation.lat,
           pickedLocation.lng
         );
-        onPickLocation({...pickedLocation, address: address});
+        onPickLocation({ ...pickedLocation, address: address });
       }
     }
+
+    handleLocation();
   }, [pickedLocation, onPickLocation]);
 
   async function verifyPermissions() {
@@ -57,12 +59,12 @@ function LocationPicker({ onPickLocation }) {
 
     if (locationPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
-        "Insufficient permissions!",
-        "You need to grant location permissions to use this app"
+        'Insufficient Permissions!',
+        'You need to grant location permissions to use this app.'
       );
-
       return false;
     }
+
     return true;
   }
 
@@ -81,14 +83,22 @@ function LocationPicker({ onPickLocation }) {
   }
 
   function pickOnMapHandler() {
-    navigation.navigate("MapPick");
+    navigation.navigate('Map');
   }
 
-  let locationPreview = <Text>No location picked yet</Text>;
+  let locationPreview = <Text>No location picked yet.</Text>;
 
-  // if (pickedLocation) {
-  //     locationPreview = <Image style={styles.image} source={{uri: getMapPreview(pickedLocation.lat, pickedLocation.lng)}} />
-  // }
+  if (pickedLocation) {
+    locationPreview = (
+      <Image
+        style={styles.image}
+        source={{
+          uri: getMapPreview(pickedLocation.lat, pickedLocation.lng),
+        }}
+      />
+    );
+  }
+
 
   return (
     <View>

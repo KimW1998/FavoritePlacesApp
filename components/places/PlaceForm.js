@@ -7,31 +7,31 @@ import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 
 function PlaceForm({onCreatePlace}) {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [selectedImage, setSelectedImage] = useState();
-  const [pickedLocation, setPickedLocation] = useState();
-
-  function changeTitleHandler(enteredText) {
-    setEnteredTitle(enteredText);
-  }
-
-  function takeImageHandler(imageUri) {
-    setSelectedImage(imageUri);
-  }
-
-  const pickLocationHandler = useCallback((location) => {
-    setPickedLocation(location);
-  }, []);
+    const [enteredTitle, setEnteredTitle] = useState('');
+    const [selectedImage, setSelectedImage] = useState();
+    const [pickedLocation, setPickedLocation] = useState();
+  
+    function changeTitleHandler(enteredText) {
+      setEnteredTitle(enteredText);
+    }
+  
+    function takeImageHandler(imageUri) {
+      setSelectedImage(imageUri);
+    }
+  
+    const pickLocationHandler = useCallback((location) => {
+      setPickedLocation(location);
+    }, []);
 
   function savePlaceHandler() {
     const placeData = new Place(enteredTitle, selectedImage, pickedLocation);
-   onCreatePlace(placeData);
+    onCreatePlace(placeData);
   }
 
   return (
     <ScrollView style={styles.form}>
       <View>
-        <Text style={styles.label}>title</Text>
+        <Text style={styles.label}>Title</Text>
         <TextInput
           style={styles.input}
           onChangeText={changeTitleHandler}
